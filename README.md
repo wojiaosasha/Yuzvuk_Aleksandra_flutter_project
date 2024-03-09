@@ -1,16 +1,28 @@
-# test_project
+# Flutter Study Project
 
-A new Flutter project.
+This repository contains a Flutter project created for studying purposes. The project includes various features and functionalities implemented while learning Flutter.
+
+> Flutter is an open-source UI software development kit created by Google. It is used to develop cross-platform applications for mobile, web, and desktop from a single codebase. Flutter uses the Dart programming language and provides a rich set of pre-built widgets that help developers create beautiful and responsive user interfaces.
+
+### Features
+- Beautiful purple button
+- Сlick counter
+- Nothing more for now
 
 ## Getting Started
+To run this project on your local machine, follow these steps:
+1. Clone the repository: 
 
-This project is a starting point for a Flutter application.
+``` sh 
+git clone https://github.com/wojiaosasha/Yuzvuk_Aleksandra_flutter_project REPO_NAME
+```
 
-A few resources to get you started if this is your first Flutter project:
+2. Navigate to the project directory 
+``` sh
+cd REPO_NAME
+```
+3. Connect the device
+4. Type the command Flutter Run on your terminal
+5. Wait for the App to install
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Happy coding!
