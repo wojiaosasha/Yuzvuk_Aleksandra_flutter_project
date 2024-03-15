@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+import 'package:lorem_ipsum_generator/lorem_ipsum_generator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Safety social network'),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -55,16 +58,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  var name = 'Kitty';
+  bool _followed = false;
+  var followData = ['Follow', 'Unfollow'];
+  String curFollowMessage = '';
+  var followMessages = ['Thanks for following!', 'Well, bye :('];
+  var birthDate = '${Random().nextInt(27)+1}.${Random().nextInt(2)+10}.${Random().nextInt(5)+2003}\n';
+  String testArticle = LoremIpsumGenerator.generate(words: 15);
+  var postDate = DateTime.now();
 
-  void _incrementCounter() {
+  void _followAction() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      _followed = !_followed;
+      curFollowMessage = followMessages[_followed ? 0 : 1];
     });
   }
 
@@ -86,40 +92,120 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: Align(
+        alignment: Alignment.topLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(50.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                      name,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                  )
+                ]
+              ),
+              const SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      // Image.network('https://picsum.photos/250?image=9'),
+                      const Image(
+                          height: 300,
+                          image: AssetImage('images/cat.jpg')
+                      ),
+                      const SizedBox(height: 20),
+                      TextButton(
+                        // statesController: statesController,
+                        // style: widget.style,
+                        onPressed: _followAction,
+                        child: Text(
+                          followData[_followed ? 1 : 0]
+                        ),
+                      ),
+                      Text(
+                          curFollowMessage,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 50),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      const Text(
+                        'Personal information:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const Text('Some public personal information\n'),
+                      const Text(
+                        'Date of Birth:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                          birthDate,
+                      ),
+                      const Text(
+                        'About me:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const Text('I\'m superrr cuuute and didn\'t sleep enough\n'),
+                      const Text(
+                        'Fav icon:',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const Icon(Icons.heart_broken),
+                      const Text(''),
+                      // Text(
+                      //   '$_counter',
+                      //   style: Theme.of(context).textTheme.headlineMedium,
+                      // ),
+                    ],
+                  )
+                ],
+              ),
+              Row(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '$name:',
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Text(
+                        testArticle,
+                        // softWrap: true,
+                        // overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        '\n${postDate}',
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.withOpacity(1.0)),
+                      ),
+                      // Expanded(
+                      //   child:
+                      //   Text(testArticle),
+                      // ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
